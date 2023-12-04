@@ -1,16 +1,16 @@
 <?php
-class O {
+class Order {
     #atributos de tablas
     protected $order_id;
     protected $x_user_id;
     protected $order_date;
     // Relación con orders
-    protected $orderDetails;
+    protected $items;
     public function __construct($order_id, $x_user_id, $order_date){
         $this->order_id = $order_id;
         $this->x_user_id = $x_user_id;
         $this->order_date = $order_date;
-        $this->orderDetails = [];
+        $this->items = [];
     }
 
     public function __get($atributo){
@@ -23,5 +23,8 @@ class O {
         $this->{$data}[] = $value;
     }
 
+    public function __toString(){
+        return $this->order_id." - ".$this->x_user_id." - ".$this->order_date;
+    } 
 
 }

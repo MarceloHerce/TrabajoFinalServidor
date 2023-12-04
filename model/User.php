@@ -9,8 +9,10 @@ class User {
     protected $email;
     protected $floor;
     protected $x_rol_id;
+    
     // Relación con orders
     protected $userOrders;
+
     public function __construct($user_id, $user_name, $user_password, $address, $phone, $email, $floor, $x_rol_id ){
         $this->user_id = $user_id;
         $this->user_name = $user_name;
@@ -33,6 +35,8 @@ class User {
         $this->{$data}[] = $value;
     }
 
-
+    public function __toString(){
+        return $this->user_id." - ".$this->user_name." - ".$this->user_password." - ".$this->address." - ".$this->phone." - ".$this->email." - ".$this->floor." - ".$this->x_rol_id;
+    }
 }
 ?>

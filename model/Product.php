@@ -1,21 +1,12 @@
 <?php
 class Product {
-    #atributos de tablas
-    protected $product_id;
-    protected $pro_name;
-    protected $pro_description;
-    protected $price;
     protected $stock;
-    protected $image;
     protected $x_category_id;
-    public function __construct($product_id, $pro_name, $pro_description, $price, $stock, $image, $x_category_id){
-        $this->product_id = $product_id;
-        $this->pro_name = $pro_name;
-        $this->pro_description = $pro_description;
-        $this->price = $price;
+
+    public function __construct($id, $name, $description, $price, $stock, $image, $category_id) {
+        parent::__construct(1,$id, $name, $description, $price, $image);
         $this->stock = $stock;
-        $this->image = $image;
-        $this->x_category_id = $x_category_id;
+        $this->category_id = $category_id;
     }
 
     public function __get($atributo){
@@ -27,6 +18,22 @@ class Product {
     public function pushToData($data,$value) {
         $this->{$data}[] = $value;
     }
-
-
+    // Sort by
+    public static function sortByPriceAsc($a, $b) {
+        return $a->price - $b->price;
+    }
+    public static function sortByPriceDesc($a, $b) {
+        return $b->price - $a->price;
+    }
+    public static function sortByNameAsc($a, $b) {
+        return strcmp($a->name , $b->name);
+    }
+    public static function sortByNameDesc($a, $b) {
+        return strcmp($b->name , $a->name);
+    }
+    public function __toString(){
+        return $this->product_id." - ".$this->pro_name." - ".$this->pro_description." - ".$this->price." - ".$this->stock." - ".$this->image." - ".$this->x_category_id;
+    }
+    
 }
+?>

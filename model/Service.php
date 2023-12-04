@@ -1,18 +1,8 @@
 <?php
-class Product {
-    #atributos de tablas
-    protected $service_id;
-    protected $ser_name;
-    protected $ser_description;
-    protected $price;
-    protected $image;
-    public function __construct($service_id, $ser_name, $ser_description, $price, $stock, $image){
-        $this->service_id = $service_id;
-        $this->ser_name = $ser_name;
-        $this->ser_description = $ser_description;
-        $this->price = $price;
-        $this->stock = $stock;
-        $this->image = $image;
+class Service extends Article{
+
+    public function __construct($id, $name, $description, $price, $image){
+        parent::__construct(2,$id, $name, $description, $price, $image);
     }
 
     public function __get($atributo){
@@ -25,5 +15,8 @@ class Product {
         $this->{$data}[] = $value;
     }
 
-
+    public function __toString(){
+        return parent::__toString();
+    }
 }
+?>

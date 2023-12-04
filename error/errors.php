@@ -2,9 +2,11 @@
 <?php
 
 try {
-    require_once "../connection/Connection.php";
+    echo dirname(__DIR__)."\\connection\\Connection.php";
+    require_once dirname(__DIR__)."\\connection\\Connection.php";
+        echo '<br>';
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
+    var_dump($pdo);
     // Consulta SQL para obtener todas las imágenes de la tabla products
     $sql = "SELECT image FROM products";
     $stmt = $pdo->query($sql);
