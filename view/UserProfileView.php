@@ -8,10 +8,19 @@ if(!isset($user)){
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- My css -->
-    <link href="../view/css/style.css" rel="stylesheet" type="text/css"/>
-    
+    <meta name="description" content="Este es un ejemplo crud">
+    <meta name="keywords" content="html, css, js, proyectos, php">
+    <meta name="language" content="EN">
+    <meta name="author" content="marcelo.herce@a.vedrunasevillasj.es">
+    <meta name="robots" content="index,follow">
+    <meta name="revised" content="Tuesday, February 28th, 2023, 23:00pm">
+    <meta name="viewport" content="width=device-width, initial scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE-edge, chrome1">
+    <link rel="stylesheet" href="../view/css/style.css">
+    <script type="text/javascript" src="../view/js/main.js" defer></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
+    <link rel="icon" href="../view/src/Logo.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="../view/src/Logo.ico" type="image/x-icon">
     <title>Profile</title>
 </head>
 <body>
@@ -61,15 +70,15 @@ if(!isset($user)){
                     </label>
                     <div class="accordion-content">
                         <?php $totalPrice = 0; ?>
-                        <?php foreach ($cart->art as $art): ?>
-                            <?php $totalPrice+= $art["item"]->price*$art["quantity"]; ?>
+                        <?php foreach ($cart->items as $item): ?>
+                            <?php $totalPrice+= $item["item"]->price*$item["quantity"]; ?>
                             <div class="pCard">
-                                <div class=""><img src="data:image/jpeg;base64,<?= $art["item"]->image; ?>" alt="image"></div>
+                                <div class=""><img src="data:image/jpeg;base64,<?= $item["item"]->image; ?>" class="card-img-top" alt="image"></div>
                                 <div class="">
-                                    <h5 class=""><?= $art["item"]->name; ?></h5>
-                                    <p class=""><?= $art["item"]->description; ?></p>
-                                    <p class=""><?= $art["item"]->price*$item["quantity"]."€" ?></p>
-                                    <p class="">Quantity: <?= $art["quantity"]; ?></p>
+                                    <h5 class=""><?= $item["item"]->name; ?></h5>
+                                    <p class=""><?= $item["item"]->description; ?></p>
+                                    <p class=""><?= $item["item"]->price*$item["quantity"]."€" ?></p>
+                                    <p class="">Quantity: <?= $item["quantity"]; ?></p>
                                 </div>
                             </div>
                         <?php endforeach; ?>

@@ -23,13 +23,6 @@ abstract class Article {
     public function __set($atributo,$valor){
         $this->$atributo = $valor;
     }
-    
-    public function pushToData($data,$value) {
-        $this->{$data}[] = $value;
-    }
 
-    public function __toString(){
-        return $this->type." ".$this->id." - ".$this->name." - ".$this->description." - ".$this->price." - ".$this->image;
-    }
 }
 ?>
