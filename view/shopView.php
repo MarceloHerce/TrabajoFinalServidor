@@ -22,8 +22,19 @@
         <?php
             if (!empty($_SERVER['REQUEST_URI']) && strpos($_SERVER['REQUEST_URI'], '?select=') === false) {
                 // La URL no contiene ?select= al final, así que lo añadimos
-                header('Location: ' . $_SERVER['REQUEST_URI'] . '?select=');
+                header('Location: ' . $_SERVER['REQUEST_URI'] . '?select=all');
                 exit();
+            }
+            if(isset($_GET["select"])){
+                $url = $_SERVER['REQUEST_URI'];
+                if (strpos($url, "&") !== false) {
+                    // substring hasta &
+                    $urlWithProductCategory = substr($url, 0, strpos($url, "&"));
+                } else {
+                    // Si no hay & se queda con la url base
+                    $urlWithProductCategory = $url;
+                }
+
             }
         ?>
         <div>
@@ -52,19 +63,19 @@
             <div class="containerC">
                 <h3>Categories</h3>
                 <div class="container">
-                    <a class="" href="?select=all">All</a>
-                    <a class="" href="?select=hardware">Hardware</a>
-                    <a class="" href="?select=peripherals">Periphericals</a>
-                    <a class="" href="?select=key caps">Key Caps</a>
+                    <a class="" href="?select=all" id="all">All</a>
+                    <a class="" href="?select=hardware" id="hardware">Hardware</a>
+                    <a class="" href="?select=peripherals" id="periphericals">Periphericals</a>
+                    <a class="" href="?select=key caps" id="keyCaps">Key Caps</a>
                 </div>
             </div>
             <div class="containerC">
                 <h3>Order by</h3>
                 <div class="container">
-                    <a class="" href="<?= $_SERVER['REQUEST_URI']?>&price=des">Higher Price</a>
-                    <a class="" href="<?= $_SERVER['REQUEST_URI']?>&price=asc">Lower Price</a>
-                    <a class="" href="<?= $_SERVER['REQUEST_URI']?>&name=asc">A-Z</a>
-                    <a class="" href="<?= $_SERVER['REQUEST_URI']?>&name=des">Z-A</a>
+                    <a class="" href="<?= $urlWithProductCategory?>&price=des">Higher Price</a>
+                    <a class="" href="<?= $urlWithProductCategory?>&price=asc">Lower Price</a>
+                    <a class="" href="<?= $urlWithProductCategory?>&name=asc">A-Z</a>
+                    <a class="" href="<?= $urlWithProductCategory?>&name=des">Z-A</a>
                 </div>
             </div>
         </div>

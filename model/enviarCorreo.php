@@ -20,14 +20,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $mail->isSMTP();                                     
         $mail->Host       = 'outlook.office365.com';                
         $mail->SMTPAuth   = true;                            
-        $mail->Username   = 'pruebasVedruna@outlook.es';           
-        $mail->Password   = 'V3drun@Sevilla';                       
+        $mail->Username   = 'marceloherce@outlook.es';           
+        $mail->Password   = 'MR2bNyF35Dmfh.T';                       
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;  
         $mail->Port       = 587;                             
 
         // Remitente y destinatario
-        $mail->setFrom('pruebasVedruna@outlook.es', $nombre);
-        $mail->addAddress('pruebasVedruna@outlook.es');
+        $mail->setFrom('marceloherce@outlook.es', $nombre);
+        $mail->addAddress('marceloherce@outlook.es');
 
         //$mail->addReplyTo($email, 'Information');
 
