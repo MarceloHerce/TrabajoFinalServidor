@@ -16,9 +16,7 @@ class Product extends Article{
     public function __set($atributo,$valor){
         $this->$atributo = $valor;
     }
-    public function pushToData($data,$value) {
-        $this->{$data}[] = $value;
-    }
+
     // Sort by
     public static function sortByPriceAsc($a, $b) {
         return $a->price - $b->price;
@@ -31,9 +29,6 @@ class Product extends Article{
     }
     public static function sortByNameDesc($a, $b) {
         return strcmp($b->name , $a->name);
-    }
-    public function __toString(){
-        return $this->product_id." - ".$this->pro_name." - ".$this->pro_description." - ".$this->price." - ".$this->stock." - ".$this->image." - ".$this->x_category_id;
     }
     
 }

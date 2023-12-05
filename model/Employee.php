@@ -23,8 +23,5 @@ class Employee{
         $this->$attribute = $value;
     }
 
-    public function __toString(){
-        return $this->employee_id." - ".$this->emp_name." - ".$this->job_title." - ".$this->emp_description." - ".$this->image;
-    }
 }
 ?>

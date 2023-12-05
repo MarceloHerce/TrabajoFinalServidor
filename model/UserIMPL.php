@@ -1,7 +1,7 @@
 <?php
 require("../model/User.php");
 
-
+// Seleccionar todos los usuarios
 function selectUserById($pdo, $userId){
     try {
         // Query

@@ -19,12 +19,5 @@ class Order {
     public function __set($atributo,$valor){
         $this->$atributo = $valor;
     }
-    public function pushToData($data,$value) {
-        $this->{$data}[] = $value;
-    }
-
-    public function __toString(){
-        return $this->order_id." - ".$this->x_user_id." - ".$this->order_date;
-    } 
 
 }

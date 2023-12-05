@@ -4,31 +4,28 @@ require_once("../connection/Connection.php");
 session_start();
 
 if(isset($_GET["empty"])){
-    setcookie('cartCokie', '', time() - (86400 * 2 + 1), '/');
+    setcookie('cartCokie', '', time() - (24 * 60 * 60 * 2 + 1), '/');
 }
 if(isset($_GET["id"]) && isset($_GET["type"])){
-    $itemId = $_GET["id"];
-    $itemType = $_GET["type"];
-    $items = unserialize(base64_decode($_COOKIE["cartCokie"]));
+    $articleId = $_GET["id"];
+    $articleType = $_GET["type"];
+    $articles = unserialize(base64_decode($_COOKIE["cartCokie"]));
 
-    function deleteItemByKeys(&$items, $value1, $value2) {
+    function deleteArticleByKeys(&$articles, $value1, $value2) {
         $cont = 0;
-        foreach ($items as $item) {
+        foreach ($articles as $art) {
 
-            if ($item["type"] === $value1 && $item["id"] === $value2) {
-                echo "D";
-                //Unset del item y posiciones
-                array_splice($items, $cont, 1);
-                //$items[$cont] = $item;
-                $cookieItems = base64_encode(serialize($items));
-                setcookie("cartCokie", $cookieItems, time() + (86400 * 2), "/");
+            if ($art["type"] === $value1 && $art["id"] === $value2) {
+                //Eliminar articulo del carrito
+                array_splice($articles, $cont, 1);
+                $cookieItems = base64_encode(serialize($articles));
+                setcookie("cartCokie", $cookieItems, time() + (24 * 60 * 60 * 2), "/");
                 header("Location: ../view/cartView.php");
-                // Found the associative array
             }
             $cont++;
         }
     }
-    deleteItemByKeys($items, $itemType, $itemId);
+    deleteArticleByKeys($articles, $articleType, $articleId);
     header("Location ../view/cartView.php");
 }else {
 

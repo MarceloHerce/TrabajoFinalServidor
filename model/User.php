@@ -31,12 +31,6 @@ class User {
     public function __set($atributo,$valor){
         $this->$atributo = $valor;
     }
-    public function pushToData($data,$value) {
-        $this->{$data}[] = $value;
-    }
 
-    public function __toString(){
-        return $this->user_id." - ".$this->user_name." - ".$this->user_password." - ".$this->address." - ".$this->phone." - ".$this->email." - ".$this->floor." - ".$this->x_rol_id;
-    }
 }
 ?>

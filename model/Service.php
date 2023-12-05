@@ -11,12 +11,6 @@ class Service extends Article{
     public function __set($atributo,$valor){
         $this->$atributo = $valor;
     }
-    public function pushToData($data,$value) {
-        $this->{$data}[] = $value;
-    }
 
-    public function __toString(){
-        return parent::__toString();
-    }
 }
 ?>

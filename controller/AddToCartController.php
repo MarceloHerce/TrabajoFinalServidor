@@ -5,66 +5,61 @@ require("../model/productImpl.php");
 require("../model/serviceImpl.php");
 
 if(!isset($_COOKIE["cartCokie"]) && isset($_GET["type"]) && isset($_GET["id"])) {
-    //SET COOKIE
-    $cookie_name = "cartCokie";
-    //$new_item = ;
-    $itemId = $_GET["id"];
-    $itemType = $_GET["type"];
-    $array =[];
-    $assocArray = [
-        "type"=>$itemType,
-        "id"=>$itemId,
+    //Setear la cookie por primera vez
+    $articleId = $_GET["id"];
+    $articleType = $_GET["type"];
+    $cookieName = "cartCokie";
+    $cart =[];
+    $cartArticles = [
+        "type"=>$articleType,
+        "id"=>$articleId,
         "quantity"=>1
     ];
-    array_push($array, $assocArray);
-    $cookie_value = base64_encode(serialize($array));
-    setcookie($cookie_name, $cookie_value, time() + (86400 * 2), "/");
+    array_push($cart, $cartArticles);
+    $cookie_value = base64_encode(serialize($cart));
+    setcookie($cookieName, $cookie_value, time() + (24 * 60 * 60 * 2), "/");
     header("Location: ../view/cartView.php");
-    echo "A";
 } else if (isset($_GET["type"]) && isset($_GET["id"])){
-    $itemId = $_GET["id"];
-    $itemType = $_GET["type"];
-    echo "B";
-    $items = unserialize(base64_decode($_COOKIE["cartCokie"]));
-    function searchArrayByKeys(&$items, $value1, $value2) {
+    // La cookie ya esta setteada
+    $articleId = $_GET["id"];
+    $articleType = $_GET["type"];
+    $articles = unserialize(base64_decode($_COOKIE["cartCokie"]));
+    function searchArrayByKeys(&$articles, $value1, $value2) {
         $cont = 0;
-        foreach ($items as $item) {
-            echo "C";
+        foreach ($articles as $art) {
 
-            if ($item["type"] === $value1 && $item["id"] === $value2) {
-                echo "D";
-                $item["quantity"] = $item["quantity"] + 1;
+            if ($art["type"] === $value1 && $art["id"] === $value2) {
+                $art["quantity"] = $art["quantity"] + 1;
                 
-                $items[$cont] = $item;
-                $cookieItems = base64_encode(serialize($items));
-                setcookie("cartCokie", $cookieItems, time() + (86400 * 2), "/");
-                // header("Location: ../view/carrito.php");
-                return true; // Found the associative array
+                $articles[$cont] = $art;
+                $cookieValue = base64_encode(serialize($articles));
+                setcookie("cartCokie", $cookieValue, time() + (24 * 60 * 60 * 2), "/");
+                // El producto se encontro en el carro
+                return true; 
             }
             $cont++;
         }
-        return false; // Not found
+        // El producto no esta en el carro
+        return false; 
     }
-    $itemExists = searchArrayByKeys($items, $itemType, $itemId);
+    $itemExists = searchArrayByKeys($articles, $articleType, $articleId);
     if (!$itemExists) {
-        echo "E";
-        //NewItem push into array
-        $assocArray = [
-            "type"=>$itemType,
-            "id"=>$itemId,
+        //Añadir un producto nuevo
+        $cartArticles = [
+            "type"=>$articleType,
+            "id"=>$articleId,
             "quantity"=>1
         ];
         
-        array_push($items, $assocArray);
-        $cookieItems = base64_encode(serialize($items));
-        setcookie("cartCokie", $cookieItems, time() + (86400 * 2), "/");
-        header("Location: ../controller/CartController.php");
+        array_push($articles, $cartArticles);
+        $cookieValue = base64_encode(serialize($articles));
+        setcookie("cartCokie", $cookieValue, time() + (24 * 60 * 60 * 2), "/");
+        header("Location: ../controller/ProductsController.php?select=all");
     }
 
 }
 
 
-//header("Location: ".$_SESSION["lastVisited"]);
-header("Location: ../controller/CartController.php");
+header("Location: ../controller/ProductsController.php?select=all");
 
 ?>

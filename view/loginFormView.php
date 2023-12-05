@@ -1,6 +1,6 @@
 <?php
 
-if(isset($_SESSION["usuario"])){
+if(isset($_SESSION["userLoged"])){
     header("Location: ../controller/ProfileController.php");
 }
 ?>
@@ -41,7 +41,7 @@ if(isset($_SESSION["usuario"])){
             <li><a href="../controller/ServicesController.php">Services</a></li>
             <li><a href="../controller/AboutUsController.php">About Us</a></li>
             <li><a href="../controller/CartController.php">Cart</a></li>
-            <?php if(isset($_SESSION["usuario"])):?>
+            <?php if(isset($_SESSION["userLoged"])):?>
                 <li><a href="../controller/ProfileController.php">Profile</a></li>
                 <?php else:?>
                     <li><a href="../controller/RegisterLoginController.php">Login</a></li>

@@ -3,7 +3,7 @@ require_once("../connection/Connection.php");
 require_once("../model/userImpl.php");
 
 session_start();
-if (isset($_SESSION["usuario"])){
+if (isset($_SESSION["userLoged"])){
     if(isset($_POST["submit"])){
         $username = isset($_POST["username"]) ? trim($_POST["username"]) : false;
         $mail = isset($_POST["mail"]) ? trim($_POST["mail"]) : false;
@@ -12,11 +12,11 @@ if (isset($_SESSION["usuario"])){
         $phone = isset($_POST["phone"]) ? trim($_POST["phone"]) : false;
         $floor = isset($_POST["floor"]) ? trim($_POST["floor"]) : false;
         echo $mail;
-        var_dump($_SESSION["usuario"]);
+        var_dump($_SESSION["userLoged"]);
 
 
         $arrayErrores = array();
-        //Hacemos validadores necesarios
+        //Validadores
         if (!empty($username) && !is_numeric($username)) {
             $usernameValidado = true;
         } else {
@@ -28,7 +28,7 @@ if (isset($_SESSION["usuario"])){
         $stmt->execute([$username]);
         $rowCount = $stmt->rowCount();
 
-        if ($usernameValidado && $rowCount > 0 && !($username == $_SESSION["usuario"]->user_name)){
+        if ($usernameValidado && $rowCount > 0 && !($username == $_SESSION["userLoged"]->user_name)){
             $usernameValidado = false;
             $arrayErrores["username"] = "Este username ya está en uso".$rowCount.$username;
         }
@@ -45,7 +45,7 @@ if (isset($_SESSION["usuario"])){
         $stmt->execute([$mail]);
         $rowCount = $stmt->rowCount();
 
-        if ($mailValidado && $rowCount > 0 && !($mail == $_SESSION["usuario"]->email)) {
+        if ($mailValidado && $rowCount > 0 && !($mail == $_SESSION["userLoged"]->email)) {
             $mailValidado = false;
             $arrayErrores["mail"] = "Este mail ya ha sido registrado";
         }
@@ -65,9 +65,9 @@ if (isset($_SESSION["usuario"])){
  
             
             //Insert user on userImpl
-            $userEdited = new User($_SESSION["usuario"]->user_id, $username, $passSegura, $address, $phone, $mail, $floor, $_SESSION["usuario"]->x_rol_id);
+            $userEdited = new User($_SESSION["userLoged"]->user_id, $username, $passSegura, $address, $phone, $mail, $floor, $_SESSION["userLoged"]->x_rol_id);
             $userEdited = updatetUser($pdo, $userEdited);
-            $_SESSION["usuario"] = $userEdited;
+            $_SESSION["userLoged"] = $userEdited;
 
             if ($stmt) {
                 header("Location: ../controller/ProfileController.php");
