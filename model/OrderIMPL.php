@@ -86,13 +86,13 @@ function insertOrders($pdo) {
         $lastOrderId = $stmt->fetch()['order_id'];
 
         //Cookie
-        $cookie = unserialize(base64_decode($_COOKIE['my_cookie']));
+        $cookie = unserialize(base64_decode($_COOKIE['cartCokie']));
         foreach($cookie as $item){
             //insertar productos del carrito
             insertIntoOrderDetails($pdo, $item, $lastOrderId);
         }
         $pdo->commit();
-        setcookie('my_cookie', '', time() - (86400 * 2 + 1), '/');
+        setcookie('cartCokie', '', time() - (86400 * 2 + 1), '/');
         $pdo = null;
     } catch (PDOException $e)  {
         // Roolback
@@ -104,34 +104,18 @@ function insertIntoOrderDetails($pdo, $item, $orderId) {
     $sql = "INSERT INTO orderdetails VALUES (0, (?), (?), (?), (?))";
     $stmt= $pdo->prepare($sql);
     if ($item["type"] == 1) {
-        $stmt->bindParam(1, $orderId);
-        $stmt->bindParam(2, $item["id"]);
-        $stmt->bindParam(3, null);
-        $stmt->bindParam(4, $item["quantity"]);
+        $stmt->bindValue(1, $orderId);
+        $stmt->bindValue(2, $item["id"]);
+        $stmt->bindValue(3, null, PDO::PARAM_NULL);
+        $stmt->bindValue(4, $item["quantity"]);
         $stmt->execute();
     } elseif ($item["type"] == 2){
-        $stmt->bindParam(1, $orderId);
-        $stmt->bindParam(2, null);
-        $stmt->bindParam(3, $item["id"]);
-        $stmt->bindParam(4, $item["quantity"]);
+        $stmt->bindValue(1, $orderId);
+        $stmt->bindValue(2, null, PDO::PARAM_NULL);
+        $stmt->bindValue(3, $item["id"]);
+        $stmt->bindValue(4, $item["quantity"]);
         $stmt->execute();
     }
 }
-/*
-function getOrderByUserId(){
-    try {
-        $sql = "SELECT * FROM orders WHERE x_user_id = ?";
-        $stmt= $pdo->prepare($sql);
-        $stmt->execute([$id]);
-        $res = $stmt->fetch();
-        if ($res) {
-            $product = new User($res["product_id"], $res["pro_name"], $res["pro_description"], $res["price"],
-            $res["stock"], $res["image"], $res["x_category_id"]);
-            return $product;
-        }
-    }catch (PDOException $e) {
-        echo "No se ha podido completar la transaccion";
-    }
-}
-*/
+
 ?>

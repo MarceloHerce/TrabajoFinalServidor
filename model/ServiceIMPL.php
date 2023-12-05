@@ -32,7 +32,7 @@ function selectServiceById($pdo, $id) {
         //Validar servicio
         if ($res) {
             // Tratar img
-            $image = $s["image"];
+            $image = $res["image"];
             $deBlobImg = base64_encode($image);
 
             $service = new Service($res["service_id"], $res["ser_name"], $res["ser_description"], $res["price"],$deBlobImg);

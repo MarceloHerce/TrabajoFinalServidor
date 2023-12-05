@@ -7,9 +7,11 @@ body{
     margin: 0;
     background-color: #000000;
     color: white;
+    padding-bottom: 3rem;
 }
 header{
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-evenly;
     align-items: center;
     padding-left: 1rem;
@@ -17,21 +19,25 @@ header{
 }
 header div{
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
+    min-width: 10rem;
 }
 header img{
     width: 45%;
-}
-header a{
-    text-decoration: none;
-}
-header a:visited{
-    color: inherit;
-}
-header a:hover{
-    color: inherit;
+    min-width: 10rem;
 }
 
+a{
+    color: white;
+    text-decoration: none;
+}
+a:visited{
+    color: inherit;
+}
+a:hover{
+    color: #08B451;
+}
 h1{
     font-size: xx-large;
 }
@@ -47,9 +53,12 @@ p{
     padding: 0;
     margin: 0;
     display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.65rem;
 }
 .nav li {
-    margin-right: 20px;
+    min-width: 2rem;
     cursor: pointer;
     position: relative;
     overflow: hidden;
@@ -66,10 +75,19 @@ p{
 }
 .container{
     padding-top: 1rem;
+    padding-bottom: 1rem;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     gap: 1rem;
+    width: 100%;
+}
+.containerC{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 1rem;
 }
 .pCard{
     max-width: 30%;
@@ -88,4 +106,166 @@ p{
     max-width: 100%;
     min-width: 100%;
     display: block;
+}
+.pCard a{
+    color: blacK;
+}
+.btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: solid black 2px;
+    border-radius: 15px;
+    padding: 0.55rem 1rem;
+    background-color: #08B451;
+    min-width: 1rem;
+}
+.btn:hover{
+    background-color: #28C05B;
+    color: black;
+}
+.j-center{
+    justify-content: center;
+    gap: 1rem;
+}
+.accordion {
+    width: 100%;
+    max-width: 600px;
+    color: #000000;
+}
+
+.accordion-item {
+    border-bottom: 1px solid #08B451;
+}
+
+.accordion-header {
+    display: block;
+    padding: 15px;
+    background-color: white;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.accordion-content {
+    display: none;
+    padding: 15px;
+    background-color: white;
+}
+
+input[type="checkbox"] {
+    display: none;
+}
+
+input[type="checkbox"]:checked + .accordion-header {
+    background-color: white;
+}
+
+input[type="checkbox"]:checked + .accordion-header + .accordion-content {
+    display: block;
+}
+#cpuIndex{
+    display: none;
+}
+.index_img{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: auto;
+    max-height: 10svh;
+    padding: 0%;
+}
+.index_img img{
+    width: auto;
+    max-height: 70svh;
+}
+.containerForm {
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+}
+.displayN{
+    display: none;
+}
+
+form {
+    color: black;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+button {
+    background-color: #4caf50;
+    color: black;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+#aboutUsText{
+    padding-left: 2rem;
+    padding-right: 2rem;
+    border-bottom: #08B451 solid 1px;
+}
+.j-text{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+#aboutUsImg{
+    border-radius: 15px;
+    resize: none;
+}
+textarea {
+    resize: vertical;
+}
+
+@media screen and (min-width: 600px) {
+    .containerForm {
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    form {
+        padding: 30px;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    textarea {
+        margin-bottom: 20px;
+    }
+
+    button {
+        padding: 12px 18px;
+    }
+}
+
+@media screen and (min-width: 1020px) {
+    #cpuIndex{
+        display: block;
+    }
 }
