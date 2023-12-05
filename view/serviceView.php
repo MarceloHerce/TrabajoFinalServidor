@@ -2,77 +2,50 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="view/css/style.css">
-    <script type="text/javascript" src="view/js/main.js" defer></script>
-    <title>Products</title>
+    <meta name="description" content="Este es un ejemplo crud">
+    <meta name="keywords" content="html, css, js, proyectos, php">
+    <meta name="language" content="EN">
+    <meta name="author" content="marcelo.herce@a.vedrunasevillasj.es">
+    <meta name="robots" content="index,follow">
+    <meta name="revised" content="Tuesday, February 28th, 2023, 23:00pm">
+    <meta name="viewport" content="width=device-width, initial scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE-edge, chrome1">
+    <link rel="stylesheet" href="../view/css/style.css">
+    <script type="text/javascript" src="../view/js/main.js" defer></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
+    <link rel="icon" href="../view/src/Logo.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="../view/src/Logo.ico" type="image/x-icon">
+    <title>Services</title>
 </head>
 <body>
     <header>
-        <ul>
-            <li><a href="">Home</a></li>
-            <li><a href="">Shop</a></li>
-            <li><a href="">About Us</a></li>
+        <div>
+            <img src="../view/src/Logo.png" alt="">
+            <h1>ShopIT</h1>
+        </div>
+        <ul class="nav">
+            <li><a href="../index.php">Home</a></li>
+            <li><a href="../controller/ProductsController.php?select=all">Shop</a></li>
+            <li><a href="../controller/ServicesController.php">Services</a></li>
+            <li><a href="../controller/AboutUsController.php">About Us</a></li>
+            <li><a href="../controller/CartController.php">Cart</a></li>
+            <?php if(isset($_SESSION["usuario"])):?>
+                <li><a href="../controller/ProfileController.php">Profile</a></li>
+                <?php else:?>
+                    <li><a href="../controller/RegisterLoginController.php">Login</a></li>
+            <?php endif?>
         </ul>
     </header>
     <main>
-        <div class="container">
-            <img src="view/src/Servidor_PC 2.png" alt="">
-            <img src="view/src/Servidor_CPU 2.png" alt="">
-        </div>
-        <div class="container">
-            <button id="all">All categories</button>
-            <button id="computer_Parts">Computer Parts</button>
-            <button id="peripherals">Peripherals</button>
-            <button id="keys">Keys</button>
-        </div>
-        <?php 
-        require_once (__DIR__."\\model\\ProductIMPL.php");
-        // require_once ("connection\\Connection.php");
-        function connection($host, $user, $pass, $bd) {
-            return new PDO("mysql:host=$host;dbname=$bd", $user, $pass);
-        }
-        
-        try {
-            $host = "localhost:3306";
-            $user = "root";
-            $pass = "root";
-        
-            $bd = "techshop";
-        
-            $pdo = connection($host, $user, $pass, $bd);
-            var_dump($pdo);
-            echo "connection";
-        }  catch (PDOException $e) {
-            header("Location: ../error/errors.php");
-        }
-        
-        // Codigo nornmal
-        try {
-            // Esto te ayudará a verificar si $pdo se está inicializando correctamente
-            echo '<br>';
-            var_dump($pdo);
-            echo '<br>';
-            // Asegúrate de que $pdo no sea null antes de llamar a la función selectAllProducts
-            if ($pdo != null) {
-                $products = selectAllProducts($pdo);
-            } else {
-                echo "La conexión PDO es nula.";
-            }
-        } catch (Exception $e) {
-            echo "Error: " . $e->getMessage();
-        }
-        ?>
         <div class="container" id="product_container">
-            <?php foreach($products as $pro): ?>
+            <?php foreach($services as $ser): ?>
                 <div class="pCard">
-                    <p><?= $pro->product_id;?></p>
-                    <p><?= $pro->pro_name;?></p>
-                    <p><?= $pro->pro_description;?></p>
-                    <p><?= $pro->price;?></p>
-                    <p><?= $pro->stock;?></p>
-                    <p><?= $pro->x_category_id;?></p>
-                    <img src="data:image/jpeg;base64,<?=$pro->image; ?>" alt="image">
+                    <p><?= $ser->id;?></p>
+                    <h3><?= $ser->name;?></h3>
+                    <img src="data:image/jpeg;base64,<?=$ser->image; ?>" alt="image">
+                    <p><?= $ser->price;?> $</p>
+                    <p><?= $ser->description;?></p>
+                    <a class="btn" href="../controller/AddToCartController.php?id=<?= $ser->id?>&type=<?= $ser->type?>">Add Cart +</a>
                 </div>
             <?php endforeach; ?>
         </div>

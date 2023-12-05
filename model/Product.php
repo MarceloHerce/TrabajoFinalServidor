@@ -1,12 +1,13 @@
 <?php
-class Product {
+require_once("../model/Article.php");
+class Product extends Article{
     protected $stock;
     protected $x_category_id;
 
     public function __construct($id, $name, $description, $price, $stock, $image, $category_id) {
         parent::__construct(1,$id, $name, $description, $price, $image);
         $this->stock = $stock;
-        $this->category_id = $category_id;
+        $this->x_category_id = $category_id;
     }
 
     public function __get($atributo){

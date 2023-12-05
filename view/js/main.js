@@ -1,4 +1,16 @@
-const allBtn = document.querySelector("#all");
-const pcBtn = document.querySelector("#computer_Parts");
-const periBtn = document.querySelector("#peripherals");
-const keysBtn = document.querySelector("#keys");
+const loginBtn = document.getElementById('loginBtn');
+const registerBtn = document.getElementById('registerBtn');
+const loginForm = document.getElementById('login');
+const registerForm = document.getElementById('register');
+
+loginBtn.addEventListener('click', function (event) {
+    event.preventDefault();
+    loginForm.style.display = 'block';
+    registerForm.style.display = 'none';
+});
+
+registerBtn.addEventListener('click', function (event) {
+    event.preventDefault();
+    loginForm.style.display = 'none';
+    registerForm.style.display = 'block';
+});

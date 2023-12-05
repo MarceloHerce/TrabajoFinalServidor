@@ -36,26 +36,46 @@ function selectProductById($pdo, $id){
         echo "Error al obtener producto" . $e;
     }
 }
-function selectProductsByCategory($pdo, $categoryId){
+function selectProductsByCategoryId($pdo, $categoryId){
     try {
         //Hacemos la query
         $sql = "SELECT * FROM products WHERE x_category_id = (?)";
         $stmt= $pdo->prepare($sql);
         $stmt->bindParam(1, $categoryId);
         $stmt->execute();
+        $results = [];
         // Insertar productos en array
         while ($res = $stmt->fetch()) {
             $imageData = $res["image"];
             $deBlobImg = base64_encode($imageData);
             $product = new Product($res["product_id"], $res["pro_name"], $res["pro_description"], $res["price"], $res["stock"], $deBlobImg, $res["x_category_id"]);
-            $products[] = $product;
+            array_push($results, $product);
         }
-        return $products;
+        return $results;
     }catch (PDOException $e) {
         echo "No se ha podido completar la transaccion";
     }
 }
-
+function selectProductsByCategoryName($pdo, $categoryName){
+    try {
+        //Hacemos la query
+        $sql = "SELECT * FROM products as pro JOIN categories as cat on pro.x_category_id = cat.category_id WHERE cat_name = (?)";
+        $stmt= $pdo->prepare($sql);
+        $stmt->bindParam(1, $categoryName);
+        $stmt->execute();
+        $results = [];
+        // Insertar productos en array
+        while ($res = $stmt->fetch()) {
+            $imageData = $res["image"];
+            $deBlobImg = base64_encode($imageData);
+            $product = new Product($res["product_id"], $res["pro_name"], $res["pro_description"], $res["price"], $res["stock"], $deBlobImg, $res["x_category_id"]);
+            array_push($results, $product);
+        }
+        return $results;
+    }catch (PDOException $e) {
+        echo "No se ha podido completar la transaccion" .$e;
+    }
+}
 function orderByPriceAscend($array){
     usort($array, array('Product','sortByPriceAsc'));
     return $array;
@@ -77,7 +97,7 @@ function productImage($img){
     return $base64Image;
 }
 
-public function insertProduct($product) {
+function insertProduct($product) {
     try {
         $this->connect();
 
@@ -101,7 +121,7 @@ public function insertProduct($product) {
     }
 }
 
-public function updateProduct($product) {
+function updateProduct($product) {
     try {
         $this->connect();
 
@@ -131,8 +151,7 @@ public function updateProduct($product) {
         echo "Error: " . $e->getMessage();
     }
 }
-
-public function deleteProduct($product_id) {
+function deleteProduct($product_id) {
     try {
         $this->connect();
 
