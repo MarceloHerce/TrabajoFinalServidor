@@ -43,8 +43,8 @@ include_once("../connection/Connection.php");
     </header>
     <div class="containerC" id="aboutUsText">
         <h3>Navigating Tomorrow's Tech Today, with ShopIT</h3>
-        <div>
-            <h2>Your Tech Journey Begins </h2>
+        <div id="aboutUsContent">
+            <h2 class="slogan">Your Tech Journey Begins </h2>
             <div class="j-text">
                 <p>
                     At ShopIT, we believe in  constant innovation 
@@ -62,6 +62,9 @@ include_once("../connection/Connection.php");
                     professional, or a business owner, we have the 
                     right tools to enhance your digital experience.
                 </p>
+                <p>
+                We have a free shipping policy and focus on customer service, acting on your opinions.
+                </p>
             </div>
         </div>
     </div>
@@ -71,11 +74,15 @@ include_once("../connection/Connection.php");
                 <h2><?= $emp->emp_name;?></h2>
                 <img src="data:image/jpeg;base64,<?=$emp->image; ?>" alt="image" id="aboutUsImg">
                 <h3><?= $emp->job_title;?></h3>
+                <h3><?= $emp->emp_description;?></h3>
                 
             </div>
         <?php endforeach; ?>
     </div>
     
+    <div style="width: 100%"><iframe width="100%" height="600" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=es&amp;q=Espinosa%20y%20carcel%2015+(ShopIT)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"><a href="https://www.gps.ie/car-satnav-gps/">GPS car tracker</a></iframe>
+    </div>
+
     <form class="containerForm"action="../model/enviarCorreo.php" method="post">
         <label for="nombre">Name:</label>
         <input type="text" id="nombre" name="nombre" required>
@@ -88,5 +95,6 @@ include_once("../connection/Connection.php");
 
         <button type="submit">Enviar</button>
     </form>
+
 </body>
 </html>

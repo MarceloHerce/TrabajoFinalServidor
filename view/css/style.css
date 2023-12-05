@@ -268,4 +268,18 @@ textarea {
     #cpuIndex{
         display: block;
     }
+    #aboutUsContent{
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+    .slogan{
+        font-size: 4rem;
+        max-width: 35%;
+    }
+    .j-text{
+        width: 45%;
+    }
 }
