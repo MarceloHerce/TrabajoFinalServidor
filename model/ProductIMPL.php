@@ -101,8 +101,7 @@ function insertProduct($product) {
     try {
         $this->connect();
 
-        $sql = "INSERT INTO products (pro_name, pro_description, price, stock, image, x_category_id) 
-                VALUES ((?), (?), (?), (?), (?), (?))";
+        $sql = "INSERT INTO products (pro_name, pro_description, price, stock, image, x_category_id) VALUES ((?), (?), (?), (?), (?), (?))";
 
         $stmt = $this->conexion->prepare($sql);
 
@@ -125,14 +124,7 @@ function updateProduct($product) {
     try {
         $this->connect();
 
-        $sql = "UPDATE products SET 
-                pro_name = (?)
-                pro_description = (?), 
-                price = (?), 
-                stock = (?), 
-                image = (?), 
-                x_category_id = (?) 
-                WHERE product_id = (?)";
+        $sql = "UPDATE products SET pro_name = (?)pro_description = (?), price = (?), stock = (?), image = (?), x_category_id = (?) WHERE product_id = (?)";
 
         $stmt = $this->conexion->prepare($sql);
 

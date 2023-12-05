@@ -18,7 +18,7 @@
                 $usuario = $res->fetch();
     
                 if (password_verify($pass, $usuario["password"])) {
-                    $_SESSION["usuario"] = selectUserById($pdo, $usuario["id"]);
+                    $_SESSION["userLoged"] = selectUserById($pdo, $usuario["id"]);
                     $pdo = null;
                     header("Location:  ../controller/ProfileController.php");
                 } else {
@@ -45,7 +45,7 @@
             $usuario = $res->fetch();
             var_dump($usuario);
             if (password_verify($pass, $usuario["user_password"])) {
-                $_SESSION["usuario"] = selectUserById($pdo, $usuario["user_id"]);
+                $_SESSION["userLoged"] = selectUserById($pdo, $usuario["user_id"]);
                 $pdo = null;
                 header("Location: ../controller/ProfileController.php");
             } else {

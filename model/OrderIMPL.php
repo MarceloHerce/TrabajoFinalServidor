@@ -24,7 +24,7 @@ function selectOrderById($pdo, $id){
 
 function selectOrdersByUserId($pdo, $id) {
     // Query
-    $sql = "SELECT * FROM orders WHERE x_user_id = ?";
+    $sql = "SELECT * FROM orders WHERE x_user_id = ? ORDER BY order_id DESC";
     $stmt = $pdo->prepare($sql);
     $stmt->execute([$id]);
     $orders = [];
@@ -77,7 +77,7 @@ function insertOrders($pdo) {
         //Insert de order
         $sql = "INSERT INTO orders VALUES (0, ?, NOW())";
         $stmt= $pdo->prepare($sql);
-        $stmt->execute([$_SESSION["usuario"]->user_id]);
+        $stmt->execute([$_SESSION["userLoged"]->user_id]);
 
         //Seleccionar la id del carrito
         $sql = "SELECT * FROM orders ORDER BY order_id DESC LIMIT 1";
